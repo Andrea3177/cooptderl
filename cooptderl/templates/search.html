@@ -1,0 +1,23 @@
+{% extends layout %}
+
+{% block content %}
+<h3>Resultados de búsqueda para "{{ query }}":</h3>
+<ul class="list-group">
+    <br>
+    {% if results %}
+        {% for asociado in results %}
+        <li class="list-group-item">
+            <a href="{{ url_for('detalle_asociado', id_as=asociado['id_as']) }}" style="font-size: medium; color: black; padding: 10px;" >
+                <strong>{{ asociado.nombre_as }} {{ asociado.apellidos_as }}</strong>
+            </a>
+            <a href="{{ url_for('aportaciones', id_as=asociado['id_as']) }}" class="btn btn-costum">Aportaciones</a>
+            <a href="{{ url_for('ahorros', id_as=asociado['id_as']) }}" class="btn btn-costum">Ahorros</a>
+            <a href="{{ url_for('creditos', id_as=asociado['id_as']) }}" class="btn btn-costum">Créditos</a>
+        </li>
+        {% endfor %}
+    {% else %}
+        <li>No se encontraron resultados.</li>
+    {% endif %}
+</ul>
+{% endblock %}
+

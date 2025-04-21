@@ -1,0 +1,136 @@
+{% extends layout %}
+{% block content %}
+
+<h4>Creditos de {{asociado.nombre_as}} {{asociado.apellidos_as}}</h4>
+<br>
+
+<button class="btn btn-costum" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Nuevo crédito</button>
+<a href="{{ url_for('detalle_asociado', id_as=asociado.id_as) }}" class="btn btn-secondary mt-3">Detalle del Asociado</a>
+<a href="{{ url_for('search', query=asociado.nombre_as) }}" class="btn btn-costum mt-3">Volver a la búsqueda</a>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Nuevo crédito de {{ asociado.nombre_as }} {{ asociado.apellidos_as}}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container">
+    <form action="{{ url_for('creditos', id_as=asociado.id_as) }}" method="post">
+    </div>
+    <div class="row">
+                  <div class="col-md-6">
+                      <label for="linea_cred" class="form-label">Línea de Crédito</label>
+                      <select for="linea_cred" name="linea_cred" id="linea_cred"> 
+                        {% for LineaCred in lineas %}
+                          <option value="{{ LineaCred.id }}">{{ LineaCred.nombre }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="periodo_cred" class="form-label">Periodo de Crédito</label>
+                      <select for="periodo_cred" name="periodo_cred" id="periodo_cred"> 
+                        {% for PeriodoCred in periodos %}
+                          <option value="{{ PeriodoCred.id }}">{{ PeriodoCred.nombre }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                  <div class="col-md-5">
+                      <label for="plazo_cred" class="form-label">Cantidad de cuotas/Plazo</label>
+                      <input type="number" class="form-control" id="plazo_cred" name="plazo_cred" required>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="rotativo_cred" class="form-label">Rotativo</label>
+                      <select class="form-select" id="rotativo_cred" name="rotativo_cred">
+                          <option value="true">Sí</option>
+                          <option value="false">No</option>
+                      </select>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="aprobado_cred" class="form-label">Aprobado</label>
+                      <select class="form-select" id="aprobado_cred" name="aprobado_cred">
+                          <option value="true">Sí</option>
+                          <option value="false">No</option>
+                      </select>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="fecha_aprob_cred" class="form-label">Fecha de Aprobación</label>
+                      <input type="date" class="form-control" id="fecha_aprob_cred" name="fecha_aprob_cred" required>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="liquidado_cred" class="form-label">Liquidado</label>
+                      <select class="form-select" id="liquidado_cred" name="liquidado_cred">
+                          <option value="true">Sí</option>
+                          <option value="false">No</option>
+                      </select>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="liquidacion_cred" class="form-label">Fecha de Liquidación</label>
+                      <input type="date" class="form-control" id="liquidacion_cred" name="liquidacion_cred">
+                  </div>
+                  <div class="col-md-3">
+                      <label for="cancelado_cred" class="form-label">Cancelado</label>
+                      <select class="form-select" id="cancelado_cred" name="cancelado_cred">
+                          <option value="true">Sí</option>
+                          <option value="false">No</option>
+                      </select>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="limite_credito" class="form-label">Límite de Crédito</label>
+                      <input type="number" step="0.01" class="form-control" id="limite_credito" name="limite_credito" required>
+                  </div>
+                  </div>
+                  <br>
+                  <button type="submit" class="btn btn-costum">Guardar</button>                
+      </form>
+</div>
+</div>
+
+<br>
+<table class="table table-striped">
+    <thead>
+      <tr>
+      <th> Id Crédito </th>
+      <th> Linea de crédito </th>
+      <th> Limite </th>
+      <th> Fecha de aprobado </th>
+      <th> Fecha de liquidado </th>
+      <th> Cancelado </th>
+      </tr>
+    </thead>
+
+      <tbody>
+        {% if creditos == None %}
+            <tr>
+                <td colspan="7">No hay créditos registrados</td>
+            </tr>
+        {% else %}
+         {% for Credito in creditos %}
+            <tr>
+               <th> {{ Credito.id_credito }} </th>
+               <th> {{ Credito.linea_credito.nombre }} </th>
+               <th> {{ Credito.Limite_credito }} </th>
+               <th> {{ Credito.fecha_aprob_cred }} </th>
+               <th> {{ Credito.liquidacion_cred }} </th>
+               <th>
+                <input type="checkbox" 
+                       {% if Credito.cancelado_cred %}checked{% endif %} 
+                       disabled>
+               </th>
+            
+               <th> <a href=" {{ url_for('detalle_credito', id_credito = Credito.id_credito) }}" class="btn btn-costum"> Abrir </a></th>
+            </tr>
+         {% endfor %}
+        {% endif %}
+      </tbody>
+</table>
+</div>
+
+<script>
+  const today = new Date();
+  const formatteddate = today.toISOString().split('T')[0];
+  document.getElementById('fecha').value = formatteddate;
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\templates\\agregar_cliente.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|solutionrelative:cooptderl\\templates\\agregar_cliente.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\templates\\layout_admin.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|solutionrelative:cooptderl\\templates\\layout_admin.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\views.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|solutionrelative:cooptderl\\views.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7A952ED9-0C78-42F7-8008-2E85158276DC}|cooptderl.pyproj|solutionrelative:cooptderl\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "agregar_cliente.html",
+              "DocumentMoniker": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\templates\\agregar_cliente.html",
+              "RelativeDocumentMoniker": "cooptderl\\templates\\agregar_cliente.html",
+              "ToolTip": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\templates\\agregar_cliente.html",
+              "RelativeToolTip": "cooptderl\\templates\\agregar_cliente.html",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAAAAYAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-12-19T18:35:52.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "layout_admin.html",
+              "DocumentMoniker": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\templates\\layout_admin.html",
+              "RelativeDocumentMoniker": "cooptderl\\templates\\layout_admin.html",
+              "ToolTip": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\templates\\layout_admin.html",
+              "RelativeToolTip": "cooptderl\\templates\\layout_admin.html",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADAAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-12-18T14:48:01.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "models.py",
+              "DocumentMoniker": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\models.py",
+              "RelativeDocumentMoniker": "cooptderl\\models.py",
+              "ToolTip": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\models.py",
+              "RelativeToolTip": "cooptderl\\models.py",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-12-18T03:39:56.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "views.py",
+              "DocumentMoniker": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\views.py",
+              "RelativeDocumentMoniker": "cooptderl\\views.py",
+              "ToolTip": "C:\\Users\\Latitude 5400\\source\\repos\\cooptderl\\cooptderl\\views.py",
+              "RelativeToolTip": "cooptderl\\views.py",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAwwFQAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-12-17T17:33:56.502Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

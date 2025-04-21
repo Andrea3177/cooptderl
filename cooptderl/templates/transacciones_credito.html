@@ -1,0 +1,152 @@
+{% extends layout %}
+
+{% block content %}
+
+<h3> Crédito #{{ credito.id_credito }} de {{ asociado.nombre_as }} {{ asociado.apellidos_as }} </h3>
+<a href="{{ url_for('detalle_asociado', id_as=asociado.id_as) }}" class="btn btn-secondary mt-3">Detalle del Asociado</a>
+<a href="{{ url_for('search', query=asociado.nombre_as) }}" class="btn btn-costum mt-3">Volver a la búsqueda</a>
+<a href="{{ url_for('creditos', id_as=asociado.id_as) }}" class="btn btn-costum mt-3">Volver a Créditos</a>
+
+<br>
+<br>
+<div class="col-md-2">
+    <h5> <strong> Capital: </strong> {{ u_transaccion.saldo_restante }}  </h5>
+</div>
+<div class="col-md-2">
+    <h5> <strong> Saldo de intereses: </strong> {{ u_transaccion.intereses_restantes }} </h5>
+</div>
+<div class="col-md-2">
+      <h5> <strong> Saldo de intereses al día: </strong>{{ intereses_al_día }} </h5>
+</div>
+<br>
+<br>
+<div class="col-md-2">
+<button class="btn btn-costum" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Nueva Transaccion</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Transaccion en credito #{{ credito.id_credito }} del asociado {{ asociado.nombre_as }} {{ asociado.apellidos_as}}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form action="{{ url_for('detalle_credito', id_credito=credito.id_credito) }}" method="post">
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required {% if not current_user.is_admin %}disabled{% endif %}>
+        </div>
+        <div class="form-check form-switch">
+         <input class="form-check-input" type="checkbox" id="ingreso" name="ingreso">
+         <label class="form-check-label" for="ingreso">Abono</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="retiro" name="retiro">
+            <label class="form-check-label" for="retiro">Retiro</label>
+        </div>
+        <div class="mb-3">
+            <label for="monto" class="form-label">Monto:</label>
+            <input type="number" class="form-control" id="monto" name="monto" required>
+         </div>
+         <div class="mb-3">
+            <label for="forma_pago" class="form-label">Forma de pago:</label>
+            <select class="form-select" id="forma_pago" name="forma_pago" required>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Cheque">Cheque</option>
+            </select>
+         </div>
+         <div class="mb-3">
+            <label for="interes" class="form-label">Interes  a pagar:</label>
+            <input value="{{ intereses_al_día }}" type="number" class="form-control" id="interes" name="interes" required {% if not current_user.is_admin %}disabled{% endif %}>
+        </div>
+         <div class="mb-3">
+            <label for="comentario" class="form-label">Comentario:</label>
+            <input type="text" class="form-control" id="comentario" name="comentario">
+         </div>
+        <button type="submit" class="btn btn-costum">Guardar</button>
+        <button type="button" class="btn btn-costum" id="calcular">Calcular intereses</button>
+
+    </form>
+  </div>
+</div>
+</div>
+</div>
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Transacciones de Crédito</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Abono</th>
+                            <th>Abono a interés</th>
+                            <th>Abono a Capital</th>
+                            <th>Retira</th>
+                            <th>Saldo interés</th>
+                            <th>Saldo Capital</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if transacciones: %}
+                        {% for MovimientosCredito in transacciones %}
+                            <tr>
+                                <td>{{ MovimientosCredito.fecha }}</td>
+                                 <td>{{ MovimientosCredito.abono }}</td>
+                                 <td>{{ MovimientosCredito.intereses_abono }}</td>
+                                 <td>{{ MovimientosCredito.capital_abono }}</td>
+                                 <td>{{ MovimientosCredito.retiro_cant }}</td>
+                                 <td>{{ MovimientosCredito.intereses_restantes }}</td>
+                                 <td>{{ MovimientosCredito.saldo_restante }}</td>
+                                 <td>{{ MovimientosCredito.comentario }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8">No hay transacciones</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   <script>
+    
+    const today = new Date();
+    const formatteddate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+    document.getElementById('fecha').value = formatteddate;
+
+
+    const ingreso = document.getElementById('ingreso');
+    ingreso.addEventListener('change', function() {
+      const monto = document.getElementById('monto');
+      const interes = document.getElementById('interes');
+      if (ingreso.checked) {
+          monto.placeholder = 'Abono';
+          interes.classList.add('d-none');
+       } else {
+          monto.placeholder = 'Retiro';
+          interes.classList.remove('d-none');
+       }
+      });
+
+    document.getElementById('calcular').addEventListener('click', function() {
+    const fechaSeleccionada = document.getElementById('fecha').value;
+
+    fetch('/calcular_intereses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fecha: fechaSeleccionada, id_credito: "{{ credito.id_credito }}" })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('interes').value = data.intereses_al_dia;
+    })
+    .catch(error => console.error('Error:', error));
+    });
+
+  </script>
+  
+{% endblock %}

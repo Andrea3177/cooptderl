@@ -1,0 +1,64 @@
+﻿{% extends layout %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form method="POST">
+            <h2> Información General del Asociado </h2>
+            <div class="col">
+                <label for="nombre_as">Nombres:</label>
+                <input type="text" name="nombre_as" id="nombre_as">
+            </div>
+            <div class="col">
+                <label for="apellidos_as">Apellidos:</label>
+                <input type="text" name="apellidos_as" id="apellidos_as">
+            </div>
+            <div class="col">
+                <label for="apellido_cas_as">Apellido de casada:</label>
+                <input type="text" name="apellido_cas_as" id="apellido_cas_as">
+            </div>
+            <div class="col">
+                <label for="doc_identidad_as">DUI:</label>
+                <input type="number" name="doc_identidad_as" id="doc_identidad_as">
+            </div>
+            <div class="col">
+                <label for="genero_as">Género:</label>
+                <select name="genero_as" id="genero_as">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+            </div>
+            <div class="col">
+                <label for="estado_civil">Estado Civil:</label>
+                <select name="estado_civil" id="estado_civil">
+                    <option value="Soltero">Soltero/a</option>
+                    <option value="Casado">Casado/a</option>
+                    <option value="Divorciado">Divorciado/a</option>
+                    <option value="Viudo">Viudo/a</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="profesion_oficio">Profesión u Oficio:</label>
+                <input type="text" name="profesion_oficio" id="profesion_oficio">
+            </div>
+            <div class="col">
+                <label for="actividad_economica">Actividad Económica:</label>
+                <input type="text" name="actividad_economica" id="actividad_economica">
+            </div>
+            <div class="col">
+                <label for="correo_as">Correo Electrónico:</label>
+                <input type="email" name="correo_as" id="correo_as">
+            </div>
+            <div class="col">
+                <label for="numero_telefono_as">Número de Teléfono:</label>
+                <input type="text" name="numero_telefono_as" id="numero_telefono_as">
+            </div>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

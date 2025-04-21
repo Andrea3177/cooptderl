@@ -1,0 +1,102 @@
+{% extends layout %}
+
+{% block content %}
+
+<h3> Cuenta de ahorros #{{ ahorros.id_ahorros }}  de {{ asociado.nombre_as }}  {{ asociado.apellidos_as }}</h3>
+<a href="{{ url_for('detalle_asociado', id_as=asociado.id_as) }}" class="btn btn-secondary mt-3">Detalle del Asociado</a>
+<a href="{{ url_for('search', query=asociado.nombre_as) }}" class="btn btn-costum mt-3">Volver a la búsqueda</a>
+<a href="{{ url_for('ahorros', id_as=asociado.id_as) }}" class="btn btn-costum mt-3">Volver a ahorros</a>
+
+<br>
+<br>
+
+<a href="{{ url_for('pagar_intereses_ahorros', id_ahorros=ahorros.id_ahorros) }}" class="btn btn-costum">Pagar intereses</a>
+
+<button class="btn btn-costum" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Nueva Transaccion</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Transaccion en cuenta de ahorros #{{ ahorros.id_ahorros }} del asociado {{ asociado.nombre_as }} {{ asociado.apellidos_as}}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form action="{{ url_for('detalle_ahorros', id_ahorros=ahorros.id_ahorros) }}" method="post">
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required {% if not current_user.is_admin %}disabled{% endif %}>
+        </div>
+        <div class="form-check form-switch">
+         <input class="form-check-input" type="checkbox" id="ingreso" name="ingreso">
+         <label class="form-check-label" for="ingreso">Ingreso</label>
+        </div>
+        <div class="form-check form-switch">
+         <input class="form-check-input" type="checkbox" id="egreso" name="egreso">
+         <label class="form-check-label" for="egreso">Egreso</label>
+        </div>
+        <div class="mb-3">
+            <label for="monto" class="form-label">Monto:</label>
+            <input type="number" class="form-control" id="monto" name="monto" required>
+         </div>
+         <div class="mb-3">
+            <label for="forma_pago" class="form-label">Forma de pago:</label>
+            <select class="form-select" id="forma_pago" name="forma_pago" required>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Cheque">Cheque</option>
+            </select>
+         </div>
+         <div class="mb-3">
+            <label for="comentario" class="form-label">Comentario:</label>
+            <input type="text" class="form-control" id="comentario" name="comentario">
+         </div>
+
+        <button type="submit" class="btn btn-costum">Guardar</button>
+    </form>
+  </div>
+</div>
+<br>
+
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th>#</th>
+         <th>Fecha</th>
+         <th>Ingreso</th>
+         <th>Egreso</th>
+         <th>Saldo</th>
+         <th>Intereses pendientes</th>
+         <th>Dias</th>
+         <th>Comentario</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% if transacciones %}
+         {% for TransaccionAhorros in transacciones %}
+         <tr>
+            <td>{{ TransaccionAhorros.id_transaccion }}</td>
+            <td>{{ TransaccionAhorros.fecha }}</td>
+            <td>{{ TransaccionAhorros.ingreso }}</td>
+            <td>{{ TransaccionAhorros.egreso }}</td>
+            <td>{{ TransaccionAhorros.saldo_restante }}</td>
+            <td>{{ TransaccionAhorros.intereses_pendientes }}</td>
+            <td>{{ TransaccionAhorros.dias }}</td>
+            <td>{{ TransaccionAhorros.comentario }}</td>
+         </tr>
+         {% endfor %}
+      {% else %}
+         <tr>
+            <td colspan="8">No hay transacciones</td>
+         </tr>
+      {% endif %}
+   </tbody>
+</table>
+
+
+<script>
+    const today = new Date();
+    const formatteddate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+    document.getElementById('fecha').value = formatteddate;
+</script>
+
+
+{% endblock %}

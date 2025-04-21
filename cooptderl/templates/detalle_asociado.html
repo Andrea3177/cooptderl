@@ -1,0 +1,86 @@
+{% extends layout %}
+
+{% block content %}
+<h2>Detalle del Asociado</h2>
+
+<div class="card">
+    <div class="card-body">
+        <a href="{{ url_for('aportaciones', id_as=asociado.id_as) }}" class="btn btn-costum mt-3">Ver Aportaciones</a>
+        <a href="{{ url_for('creditos', id_as=asociado.id_as) }}" class="btn btn-costum mt-3">Ver Créditos</a>
+        <a href="{{ url_for('ahorros', id_as=asociado.id_as) }}" class="btn btn-costum mt-3">Ver Ahorros</a>
+
+        <h3 class="card-title mt-4">{{ asociado.nombre_as }} {{ asociado.apellidos_as }}</h3>
+        <p class="card-text"><strong>DUI:</strong> {{ asociado.doc_identidad_as }}</p>
+        <p class="card-text"><strong>Apellido de Casada:</strong> {{ asociado.apellido_cas_as }}</p>
+
+        <div class="accordion mt-4" id="accordionAsociado">
+
+            <!-- Datos de nacimiento -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingNacimiento">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNacimiento" aria-expanded="false" aria-controls="collapseNacimiento">
+                        Datos de Nacimiento
+                    </button>
+                </h2>
+                <div id="collapseNacimiento" class="accordion-collapse collapse" aria-labelledby="headingNacimiento" data-bs-parent="#accordionAsociado">
+                    <div class="accordion-body">
+                        <p><strong>Género:</strong> {{ asociado.genero_as }}</p>
+                        <p><strong>Fecha de Nacimiento:</strong> {{ asociado.fecha_nacimiento }}</p>
+                        <p><strong>País de Nacimiento:</strong> {{ asociado.pais.nombre }}</p>
+                        <p><strong>Departamento de Nacimiento:</strong> {{ asociado.depto.nombre }}</p>
+                        <p><strong>Municipio de Nacimiento:</strong> {{ asociado.municipio.nombre }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datos de Residencia -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingResidencia">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseResidencia" aria-expanded="false" aria-controls="collapseResidencia">
+                        Datos de Residencia
+                    </button>
+                </h2>
+                <div id="collapseResidencia" class="accordion-collapse collapse" aria-labelledby="headingResidencia" data-bs-parent="#accordionAsociado">
+                    <div class="accordion-body">
+                        <p><strong>Tipo de vivienda:</strong> {{ asociado.tipo_vivienda }}</p>
+                        <p><strong>Tiempo de residir en meses:</strong> {{ asociado.tiempo_residir }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datos de Contacto -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingContacto">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContacto" aria-expanded="false" aria-controls="collapseContacto">
+                        Datos de Contacto
+                    </button>
+                </h2>
+                <div id="collapseContacto" class="accordion-collapse collapse" aria-labelledby="headingContacto" data-bs-parent="#accordionAsociado">
+                    <div class="accordion-body">
+                        <p><strong>Email:</strong> {{ asociado.correo_as }}</p>
+                        <p><strong>Teléfono:</strong> {{ asociado.numero_telefono_as }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Otros -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOtros">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOtros" aria-expanded="false" aria-controls="collapseOtros">
+                        Otros Datos
+                    </button>
+                </h2>
+                <div id="collapseOtros" class="accordion-collapse collapse" aria-labelledby="headingOtros" data-bs-parent="#accordionAsociado">
+                    <div class="accordion-body">
+                        <p><strong>Estado Civil:</strong> {{ asociado.estado_civil }}</p>
+                        <p><strong>Profesión:</strong> {{ asociado.profesion_oficio }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<a href="{{ url_for('search') }}" class="btn btn-costum mt-3">Volver a la búsqueda</a>
+{% endblock %}

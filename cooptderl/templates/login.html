@@ -1,0 +1,23 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="post">
+                <h2> Ingresa tus datos: </h2>
+                <div class="form-group" style="padding:15px 0px 15px 0px">
+                    <label for='nickname_form'>Usuario</label>
+                    <input name="nickname_form" type="text" class="form-control" id='nickname_form' placeholder="Ingresa tu usuario">
+                    <br>
+                    <label for="password_form">Contraseña</label>
+                    <input name="password_form" type="password" class="form-control" id="password_form" placeholder="Ingresa tu contraseña">
+                </div>
+                <button type="submit" class="btn btn-light btn-block">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends layout %}
+
+{% block content %}
+
+<h3> Ahorros de {{ asociado.nombre_as }}  {{ asociado.apellidos_as }}</h3>
+<br>
+
+<button class="btn btn-costum" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Nueva cuenta de ahorros</button>
+<a href="{{ url_for('detalle_asociado', id_as=asociado.id_as) }}" class="btn btn-secondary mt-3">Detalle del Asociado</a>
+<a href="{{ url_for('search', query=asociado.nombre_as) }}" class="btn btn-costum mt-3">Volver a la búsqueda</a>
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Nueva cuenta de ahorros de {{ asociado.nombre_as }} {{ asociado.apellidos_as}}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form action="{{ url_for('nuevos_ahorros', id_as=asociado.id_as) }}" method="post">
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha de apertura:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required>
+        </div>
+        <div class="mb-3">
+            <label for="interes" class="form-label">Interés mensual</label>
+            <input type="number" class="form-control" id="interes_m" name="interes_m" required>
+         </div>
+         <div class="mb-3">
+            <label for="linea_ahorros" class="form-label">Linea de ahorros</label>
+            <select for="linea_ahorros" class="form-select" id="linea_ahorros" name="linea_ahorros" required>
+                <option value="Vista">Ahorros a la vista</option>
+                <option value="Programados">Ahorros programados</option>
+            </select>
+         </div>
+         <div class="mb-3">
+            <label for="final_ahorros" class="form-label">Fecha final de ahorros</label>
+            <input type="date" class="form-control" id="final_ahorros" name="final_ahorros">
+        <button type="submit" class="btn btn-costum">Guardar</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<br>
+<table class="table table-striped">
+    <thead>
+      <tr>
+      <th> Id Ahorros </th>
+      <th> Día de apertura </th>
+      <th> Linea de Ahorros </th>
+      <th> Interés mensual </th>
+      <th> Fecha para retirar ahorros </th>
+      </tr>
+    </thead>
+
+      <tbody>
+        {% if ahorros is not none %}
+         {% for Ahorros in ahorros %}
+            <tr>
+               <th> {{ Ahorros.id_ahorros }} </th>
+               <th> {{ Ahorros.apertura_ahorros }} </th>
+               <th> {{ Ahorros.linea_ahorros }} </th>
+               <th> {{ Ahorros.Interes_mensual }} </th>
+               <th> {{ Ahorros.final_ahorros }} </th>
+               <th> <a href=" {{ url_for('detalle_ahorros', id_ahorros = Ahorros.id_ahorros) }}" class="btn btn-costum"> Abrir </a></th>
+            </tr>
+         {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">No hay ahorros registrados.</td>
+            </tr>
+        {% endif %}
+      </tbody>
+</table>
+
+<script>
+  const today = new Date();
+  const formatteddate = today.toISOString().split('T')[0];
+  document.getElementById('fecha').value = formatteddate;
+</script>
+{% endblock %}
